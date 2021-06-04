@@ -1,0 +1,45 @@
+Device Name,Interface,Connected Device,Connected Interface,Purpose
+edge-sw01,GigabitEthernet0/1,edge-firewall01,GigabitEthernet0/1,Connection to outbound firewall
+edge-sw01,GigabitEthernet0/2,core-rtr01,GigabitEthernet0/0/0/1,Primary core router
+edge-sw01,GigabitEthernet0/3,core-rtr02,GigabitEthernet0/0/0/1,Secondary core router
+edge-sw01,GigabitEthernet0/0,oob-mgmt,GigabitEthernet1/1,Management network
+,,,,
+core-rtr01,GigabitEthernet0/0/0/0,core-rtr02,GigabitEthernet0/0/0/0,Peer link to secondary core
+core-rtr01,GigabitEthernet0/0/0/1,edge-sw01,GigabitEthernet0/2,Path to outside edge
+core-rtr01,GigabitEthernet0/0/0/2,dist-rtr01,GigabitEthernet2,Path to inside distribution 
+core-rtr01,GigabitEthernet0/0/0/3,dist-rtr02,GigabitEthernet2,Path to inside distribution 
+core-rtr01,MgmtEth 0/0/CPU0/0,oob-mgmt,GigabitEthernet1/2,Management network
+,,,,
+core-rtr02,GigabitEthernet0/0/0/0,core-rtr01,GigabitEthernet0/0/0/0,Peer link to primary core
+core-rtr02,GigabitEthernet0/0/0/1,edge-sw01,GigabitEthernet0/3,Path to outside edge
+core-rtr02,GigabitEthernet0/0/0/2,dist-rtr01,GigabitEthernet3,Path to inside distribution 
+core-rtr02,GigabitEthernet0/0/0/3,dist-rtr02,GigabitEthernet3,Path to inside distribution 
+core-rtr02,MgmtEth 0/0/CPU0/0,oob-mgmt,GigabitEthernet1/3,Management network
+,,,,
+dist-rtr01,GigabitEthernet2,core-rtr01,GigabitEthernet0/0/0/2,Path to core
+dist-rtr01,GigabitEthernet3,core-rtr02,GigabitEthernet0/0/0/2,Path to core
+dist-rtr01,GigabitEthernet4,dist-sw01,Ethernet1/3,Path to distribution switch 01
+dist-rtr01,GigabitEthernet5,dist-sw02,Ethernet1/3,Path to distribution switch 02
+dist-rtr01,GigabitEthernet6,dist-rtr02,GigabitEthernet6,Peer link to distribution router
+dist-rtr01,GigabitEthernet1,oob-mgmt,GigabitEthernet1/4,Management network
+,,,,
+dist-rtr02,GigabitEthernet2,core-rtr01,GigabitEthernet0/0/0/3,Path to core
+dist-rtr02,GigabitEthernet3,core-rtr02,GigabitEthernet0/0/0/3,Path to core
+dist-rtr02,GigabitEthernet4,dist-sw01,Ethernet1/4,Path to distribution switch 01
+dist-rtr02,GigabitEthernet5,dist-sw02,Ethernet1/4,Path to distribution switch 02
+dist-rtr02,GigabitEthernet6,dist-rtr02,GigabitEthernet6,Peer link to distribution router
+dist-rtr02,GigabitEthernet1,oob-mgmt,GigabitEthernet1/5,Management network
+,,,,
+dist-sw01,Ethernet1/1,dist-sw02,Ethernet1/1,Peer link to distribution switch 02
+dist-sw01,Ethernet1/2,dist-sw02,Ethernet1/2,Peer link to distribution switch 02
+dist-sw01,Ethernet1/3,dist-rtr01,GigabitEthernet4,Path to distribution router
+dist-sw01,Ethernet1/4,dist-rtr02,GigabitEthernet4,Path to distribution router
+dist-sw01,Ethernet1/11,inside-host01,ensp0s2,Access port for inside-host
+dist-sw01,Mgmt 0,oob-mgmt,GigabitEthernet1/6,Management network
+,,,,
+dist-sw02,Ethernet1/1,dist-sw01,Ethernet1/1,Peer link to distribution switch 01
+dist-sw02,Ethernet1/2,dist-sw01,Ethernet1/2,Peer link to distribution switch 01
+dist-sw02,Ethernet1/3,dist-rtr01,GigabitEthernet5,Path to distribution router
+dist-sw02,Ethernet1/4,dist-rtr02,GigabitEthernet5,Path to distribution router
+dist-sw02,Ethernet1/11,inside-host02,ensp0s2,Access port for inside-host
+dist-sw02,Mgmt 0,oob-mgmt,GigabitEthernet1/7,Management network
