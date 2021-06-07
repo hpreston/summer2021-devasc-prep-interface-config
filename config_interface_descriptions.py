@@ -14,6 +14,7 @@ import csv
 from jinja2 import Template
 from collections import defaultdict
 from pyats.topology.loader import load
+from datetime import datetime
 
 
 # Script entry point
@@ -112,16 +113,16 @@ if __name__ == "__main__":
 
     # For debugging, print the current_interface_details 
     #   Reference the Interface Model Details Docs: https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/_models/interface.pdf
-    print("Output from learn interface operation")
-    # print(current_interface_details)
-    for device, interfaces in current_interface_details.items(): 
-        print(f'Device {device} Current Interface Descriptions are: ')
-        for interface, details in interfaces.info.items(): 
-            try: 
-                print(f'  {interface} : {details["description"]}')
-            # Interfaces without descriptions won't have the key in the model
-            except KeyError: 
-                print(f'  {interface} : ')
+    # print("Output from learn interface operation")
+    # # print(current_interface_details)
+    # for device, interfaces in current_interface_details.items(): 
+    #     print(f'Device {device} Current Interface Descriptions are: ')
+    #     for interface, details in interfaces.info.items(): 
+    #         try: 
+    #             print(f'  {interface} : {details["description"]}')
+    #         # Interfaces without descriptions won't have the key in the model
+    #         except KeyError: 
+    #             print(f'  {interface} : ')
 
     # Apply new interface description configuration (with confirmation)
 
@@ -139,4 +140,23 @@ if __name__ == "__main__":
 
 
     # Update Source of Truth with Results
+    # Open the SoT again to process read the data for the report 
+    with open(args.sot, "r") as sot_file: 
+        sot = csv.DictReader(sot_file)
 
+        # Create a report file based on date/time 
+        now = datetime.now()
+        report_name = f'{now.strftime("%Y-%m-%d-%H-%M-%S")}_interface_config_report.csv'
+
+        print(f'Writing config report to file {report_name}.')
+        # Open the new report file
+        
+        # Create field names list for report by adding new fields to the SoT fields
+        
+        # Create the DictWriter object for the report output 
+        
+        # Loop over each row in the Source of Truth
+        
+        # Retrieve the current description from the learned data 
+
+        # Write report row to file
