@@ -137,8 +137,13 @@ if __name__ == "__main__":
             # Ask user if wish to deploy change to device 
             confirm = input(f"Would you like to apply this configuration to device {device} (y/n)? ")
             # If yes, apply configuration to device 
-            if confirm == "y": 
+        if confirm == "y": 
+            # Do a check to verify the device from the SoT is in the testbed
+            if device in testbed.devices: 
                 print(f"Applying configuration to device {device}.")
+            else: 
+                print(f" ⚠️ Error: Device {device} from Source of Truth is NOT in the testbed - unable to apply configuration.")
+
 
         # Print a divider between devices
         print("\n----------------------------------------------------\n")
