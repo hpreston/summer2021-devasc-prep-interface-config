@@ -1,0 +1,45 @@
+Device Name,Interface,Connected Device,Connected Interface,Purpose,Previous Interface Description,LLDP Neighbor Check Test
+edge-sw01,GigabitEthernet0/1,edge-firewall01,GigabitEthernet0/1,Connection to outbound firewall,Connected to edge-firewall01 GigabitEthernet0/1 - Connection to outbound firewall,Unknown - No LLDP Info for Interface
+edge-sw01,GigabitEthernet0/2,core-rtr01,GigabitEthernet0/0/0/1,Primary core router,Connected to core-rtr01 GigabitEthernet0/0/0/1 - Primary core router,Confirmed
+edge-sw01,GigabitEthernet0/3,core-rtr02,GigabitEthernet0/0/0/1,Secondary core router,to GigabitEthernet0/0/0/1.core-rtr02,Confirmed
+edge-sw01,GigabitEthernet0/0,oob-mgmt,GigabitEthernet1/1,Management network,to port3.sandbox-backend,Unknown - No LLDP Info for Interface
+,,,,,,LLDP Test Not Run.
+core-rtr01,GigabitEthernet0/0/0/0,core-rtr02,GigabitEthernet0/0/0/0,Peer link to secondary core,Connected to core-rtr02 GigabitEthernet0/0/0/0 - Peer link to secondary core,Confirmed
+core-rtr01,GigabitEthernet0/0/0/1,edge-sw01,GigabitEthernet0/2,Path to outside edge,Connected to edge-sw01 GigabitEthernet0/2 - Path to outside edge,Confirmed
+core-rtr01,GigabitEthernet0/0/0/2,dist-rtr01,GigabitEthernet2,Path to inside distribution ,Connected to dist-rtr01 GigabitEthernet2 - Path to inside distribution,Confirmed
+core-rtr01,GigabitEthernet0/0/0/3,dist-rtr02,GigabitEthernet2,Path to inside distribution ,Connected to dist-rtr02 GigabitEthernet2 - Path to inside distribution,Confirmed
+core-rtr01,MgmtEth 0/0/CPU0/0,oob-mgmt,GigabitEthernet1/2,Management network,,Unknown - No LLDP Info for Interface
+,,,,,,LLDP Test Not Run.
+core-rtr02,GigabitEthernet0/0/0/0,core-rtr01,GigabitEthernet0/0/0/0,Peer link to primary core,L3 Link to core-rtr01,Confirmed
+core-rtr02,GigabitEthernet0/0/0/1,edge-sw01,GigabitEthernet0/3,Path to outside edge,L3 Link to edge-sw01,Confirmed
+core-rtr02,GigabitEthernet0/0/0/2,dist-rtr01,GigabitEthernet3,Path to inside distribution ,L3 Link to dist-rtr01,Confirmed
+core-rtr02,GigabitEthernet0/0/0/3,dist-rtr02,GigabitEthernet3,Path to inside distribution ,L3 Link to dist-rtr02,Confirmed
+core-rtr02,MgmtEth 0/0/CPU0/0,oob-mgmt,GigabitEthernet1/3,Management network,,Unknown - No LLDP Info for Interface
+,,,,,,LLDP Test Not Run.
+dist-rtr01,GigabitEthernet2,core-rtr01,GigabitEthernet0/0/0/2,Path to core,Connected to core-rtr01 GigabitEthernet0/0/0/2 - Path to core,Confirmed
+dist-rtr01,GigabitEthernet3,core-rtr02,GigabitEthernet0/0/0/2,Path to core,Connected to core-rtr02 GigabitEthernet0/0/0/2 - Path to core,Confirmed
+dist-rtr01,GigabitEthernet4,dist-sw01,Ethernet1/3,Path to distribution switch 01,Connected to dist-sw01 Ethernet1/3 - Path to distribution switch 01,Confirmed
+dist-rtr01,GigabitEthernet5,dist-sw02,Ethernet1/3,Path to distribution switch 02,Connected to dist-sw02 Ethernet1/3 - Path to distribution switch 02,Confirmed
+dist-rtr01,GigabitEthernet6,dist-rtr02,GigabitEthernet6,Peer link to distribution router,Connected to dist-rtr02 GigabitEthernet6 - Peer link to distribution router,Confirmed
+dist-rtr01,GigabitEthernet1,oob-mgmt,GigabitEthernet1/4,Management network,Connected to oob-mgmt GigabitEthernet1/4 - Management network,Unknown - No LLDP Info for Interface
+,,,,,,LLDP Test Not Run.
+dist-rtr02,GigabitEthernet2,core-rtr01,GigabitEthernet0/0/0/3,Path to core,L3 Link to core-rtr01,Confirmed
+dist-rtr02,GigabitEthernet3,core-rtr02,GigabitEthernet0/0/0/3,Path to core,L3 Link to core-rtr02,Confirmed
+dist-rtr02,GigabitEthernet4,dist-sw01,Ethernet1/4,Path to distribution switch 01,L3 Link to dist-sw01,Confirmed
+dist-rtr02,GigabitEthernet5,dist-sw02,Ethernet1/4,Path to distribution switch 02,L3 Link to dist-sw02,Confirmed
+dist-rtr02,GigabitEthernet6,dist-rtr02,GigabitEthernet6,Peer link to distribution router,L3 Link to dist-rtr01,Incorrect
+dist-rtr02,GigabitEthernet1,oob-mgmt,GigabitEthernet1/5,Management network,to port7.sandbox-backend,Unknown - No LLDP Info for Interface
+,,,,,,LLDP Test Not Run.
+dist-sw01,Ethernet1/1,dist-sw02,Ethernet1/1,Peer link to distribution switch 02,Connected to dist-sw02 Ethernet1/1 - Peer link to distribution switch 02,Confirmed
+dist-sw01,Ethernet1/2,dist-sw02,Ethernet1/2,Peer link to distribution switch 02,Connected to dist-sw02 Ethernet1/2 - Peer link to distribution switch 02,Confirmed
+dist-sw01,Ethernet1/3,dist-rtr01,GigabitEthernet4,Path to distribution router,Connected to dist-rtr01 GigabitEthernet4 - Path to distribution router,Confirmed
+dist-sw01,Ethernet1/4,dist-rtr02,GigabitEthernet4,Path to distribution router,Connected to dist-rtr02 GigabitEthernet4 - Path to distribution router,Confirmed
+dist-sw01,Ethernet1/11,inside-host01,ensp0s2,Access port for inside-host,Connected to inside-host01 ensp0s2 - Access port for inside-host,Unknown - No LLDP Info for Interface
+dist-sw01,Mgmt 0,oob-mgmt,GigabitEthernet1/6,Management network,,Unknown - No LLDP Info for Interface
+,,,,,,LLDP Test Not Run.
+dist-sw02,Ethernet1/1,dist-sw01,Ethernet1/1,Peer link to distribution switch 01,VPC Peer Link,Confirmed
+dist-sw02,Ethernet1/2,dist-sw01,Ethernet1/2,Peer link to distribution switch 01,VPC Peer Link,Confirmed
+dist-sw02,Ethernet1/3,dist-rtr01,GigabitEthernet5,Path to distribution router,L3 link to dist-rtr01,Confirmed
+dist-sw02,Ethernet1/4,dist-rtr02,GigabitEthernet5,Path to distribution router,L3 link to dist-rtr02,Confirmed
+dist-sw02,Ethernet1/11,inside-host02,ensp0s2,Access port for inside-host,Link to inside-host02,Unknown - No LLDP Info for Interface
+dist-sw02,Mgmt 0,oob-mgmt,GigabitEthernet1/7,Management network,,Unknown - No LLDP Info for Interface

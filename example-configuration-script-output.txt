@@ -1,0 +1,282 @@
+Deploying standard interface descriptions to network.
+Generating interface descriptions from file interface-connections-source-of-truth.csv for testbed improved_nso_sandbox_testbed.yaml.
+Configurations will be applied to network devices.
+
+Opening and readying Source of Truth File.
+
+Device edge-sw01       Interface GigabitEthernet0/1        SOT connection: edge-firewall01 GigabitEthernet0/1
+Device edge-sw01       Interface GigabitEthernet0/2        SOT connection: core-rtr01 GigabitEthernet0/0/0/1
+Device edge-sw01       Interface GigabitEthernet0/3        SOT connection: core-rtr02 GigabitEthernet0/0/0/1
+Device edge-sw01       Interface GigabitEthernet0/0        SOT connection: oob-mgmt GigabitEthernet1/1
+Device core-rtr01      Interface GigabitEthernet0/0/0/0    SOT connection: core-rtr02 GigabitEthernet0/0/0/0
+Device core-rtr01      Interface GigabitEthernet0/0/0/1    SOT connection: edge-sw01 GigabitEthernet0/2
+Device core-rtr01      Interface GigabitEthernet0/0/0/2    SOT connection: dist-rtr01 GigabitEthernet2
+Device core-rtr01      Interface GigabitEthernet0/0/0/3    SOT connection: dist-rtr02 GigabitEthernet2
+Device core-rtr01      Interface MgmtEth 0/0/CPU0/0        SOT connection: oob-mgmt GigabitEthernet1/2
+Device core-rtr02      Interface GigabitEthernet0/0/0/0    SOT connection: core-rtr01 GigabitEthernet0/0/0/0
+Device core-rtr02      Interface GigabitEthernet0/0/0/1    SOT connection: edge-sw01 GigabitEthernet0/3
+Device core-rtr02      Interface GigabitEthernet0/0/0/2    SOT connection: dist-rtr01 GigabitEthernet3
+Device core-rtr02      Interface GigabitEthernet0/0/0/3    SOT connection: dist-rtr02 GigabitEthernet3
+Device core-rtr02      Interface MgmtEth 0/0/CPU0/0        SOT connection: oob-mgmt GigabitEthernet1/3
+Device dist-rtr01      Interface GigabitEthernet2          SOT connection: core-rtr01 GigabitEthernet0/0/0/2
+Device dist-rtr01      Interface GigabitEthernet3          SOT connection: core-rtr02 GigabitEthernet0/0/0/2
+Device dist-rtr01      Interface GigabitEthernet4          SOT connection: dist-sw01 Ethernet1/3
+Device dist-rtr01      Interface GigabitEthernet5          SOT connection: dist-sw02 Ethernet1/3
+Device dist-rtr01      Interface GigabitEthernet6          SOT connection: dist-rtr02 GigabitEthernet6
+Device dist-rtr01      Interface GigabitEthernet1          SOT connection: oob-mgmt GigabitEthernet1/4
+Device dist-rtr02      Interface GigabitEthernet2          SOT connection: core-rtr01 GigabitEthernet0/0/0/3
+Device dist-rtr02      Interface GigabitEthernet3          SOT connection: core-rtr02 GigabitEthernet0/0/0/3
+Device dist-rtr02      Interface GigabitEthernet4          SOT connection: dist-sw01 Ethernet1/4
+Device dist-rtr02      Interface GigabitEthernet5          SOT connection: dist-sw02 Ethernet1/4
+Device dist-rtr02      Interface GigabitEthernet6          SOT connection: dist-rtr02 GigabitEthernet6
+Device dist-rtr02      Interface GigabitEthernet1          SOT connection: oob-mgmt GigabitEthernet1/5
+Device dist-sw01       Interface Ethernet1/1               SOT connection: dist-sw02 Ethernet1/1
+Device dist-sw01       Interface Ethernet1/2               SOT connection: dist-sw02 Ethernet1/2
+Device dist-sw01       Interface Ethernet1/3               SOT connection: dist-rtr01 GigabitEthernet4
+Device dist-sw01       Interface Ethernet1/4               SOT connection: dist-rtr02 GigabitEthernet4
+Device dist-sw01       Interface Ethernet1/11              SOT connection: inside-host01 ensp0s2
+Device dist-sw01       Interface Mgmt 0                    SOT connection: oob-mgmt GigabitEthernet1/6
+Device dist-sw02       Interface Ethernet1/1               SOT connection: dist-sw01 Ethernet1/1
+Device dist-sw02       Interface Ethernet1/2               SOT connection: dist-sw01 Ethernet1/2
+Device dist-sw02       Interface Ethernet1/3               SOT connection: dist-rtr01 GigabitEthernet5
+Device dist-sw02       Interface Ethernet1/4               SOT connection: dist-rtr02 GigabitEthernet5
+Device dist-sw02       Interface Ethernet1/11              SOT connection: inside-host02 ensp0s2
+Device dist-sw02       Interface Mgmt 0                    SOT connection: oob-mgmt GigabitEthernet1/7
+
+Loading testbed file improved_nso_sandbox_testbed.yaml
+Connecting to all devices in testbed improved_nso_sandbox_testbed
+Learning current interface state for device edge-sw01
+Learning current interface state for device core-rtr01
+Learning current interface state for device core-rtr02
+Learning current interface state for device dist-rtr01
+Learning current interface state for device dist-rtr02
+Learning current interface state for device dist-sw01
+Learning current interface state for device dist-sw02
+
+New Device Configurations for Interface Descriptions
+----------------------------------------------------
+! Device edge-sw01
+interface GigabitEthernet0/1
+  description Connected to edge-firewall01 GigabitEthernet0/1 - Connection to outbound firewall
+interface GigabitEthernet0/2
+  description Connected to core-rtr01 GigabitEthernet0/0/0/1 - Primary core router
+interface GigabitEthernet0/3
+  description Connected to core-rtr02 GigabitEthernet0/0/0/1 - Secondary core router
+interface GigabitEthernet0/0
+  description Connected to oob-mgmt GigabitEthernet1/1 - Management network
+!
+
+Would you like to apply this configuration to device edge-sw01 (y/n)? y
+Applying configuration to device edge-sw01.
+
+----------------------------------------------------
+
+! Device core-rtr01
+interface GigabitEthernet0/0/0/0
+  description Connected to core-rtr02 GigabitEthernet0/0/0/0 - Peer link to secondary core
+interface GigabitEthernet0/0/0/1
+  description Connected to edge-sw01 GigabitEthernet0/2 - Path to outside edge
+interface GigabitEthernet0/0/0/2
+  description Connected to dist-rtr01 GigabitEthernet2 - Path to inside distribution 
+interface GigabitEthernet0/0/0/3
+  description Connected to dist-rtr02 GigabitEthernet2 - Path to inside distribution 
+interface MgmtEth 0/0/CPU0/0
+  description Connected to oob-mgmt GigabitEthernet1/2 - Management network
+!
+
+Would you like to apply this configuration to device core-rtr01 (y/n)? y
+Applying configuration to device core-rtr01.
+
+----------------------------------------------------
+
+! Device core-rtr02
+interface GigabitEthernet0/0/0/0
+  description Connected to core-rtr01 GigabitEthernet0/0/0/0 - Peer link to primary core
+interface GigabitEthernet0/0/0/1
+  description Connected to edge-sw01 GigabitEthernet0/3 - Path to outside edge
+interface GigabitEthernet0/0/0/2
+  description Connected to dist-rtr01 GigabitEthernet3 - Path to inside distribution 
+interface GigabitEthernet0/0/0/3
+  description Connected to dist-rtr02 GigabitEthernet3 - Path to inside distribution 
+interface MgmtEth 0/0/CPU0/0
+  description Connected to oob-mgmt GigabitEthernet1/3 - Management network
+!
+
+Would you like to apply this configuration to device core-rtr02 (y/n)? y
+Applying configuration to device core-rtr02.
+
+----------------------------------------------------
+
+! Device dist-rtr01
+interface GigabitEthernet2
+  description Connected to core-rtr01 GigabitEthernet0/0/0/2 - Path to core
+interface GigabitEthernet3
+  description Connected to core-rtr02 GigabitEthernet0/0/0/2 - Path to core
+interface GigabitEthernet4
+  description Connected to dist-sw01 Ethernet1/3 - Path to distribution switch 01
+interface GigabitEthernet5
+  description Connected to dist-sw02 Ethernet1/3 - Path to distribution switch 02
+interface GigabitEthernet6
+  description Connected to dist-rtr02 GigabitEthernet6 - Peer link to distribution router
+interface GigabitEthernet1
+  description Connected to oob-mgmt GigabitEthernet1/4 - Management network
+!
+
+Would you like to apply this configuration to device dist-rtr01 (y/n)? y
+Applying configuration to device dist-rtr01.
+
+----------------------------------------------------
+
+! Device dist-rtr02
+interface GigabitEthernet2
+  description Connected to core-rtr01 GigabitEthernet0/0/0/3 - Path to core
+interface GigabitEthernet3
+  description Connected to core-rtr02 GigabitEthernet0/0/0/3 - Path to core
+interface GigabitEthernet4
+  description Connected to dist-sw01 Ethernet1/4 - Path to distribution switch 01
+interface GigabitEthernet5
+  description Connected to dist-sw02 Ethernet1/4 - Path to distribution switch 02
+interface GigabitEthernet6
+  description Connected to dist-rtr02 GigabitEthernet6 - Peer link to distribution router
+interface GigabitEthernet1
+  description Connected to oob-mgmt GigabitEthernet1/5 - Management network
+!
+
+Would you like to apply this configuration to device dist-rtr02 (y/n)? y
+Applying configuration to device dist-rtr02.
+
+----------------------------------------------------
+
+! Device dist-sw01
+interface Ethernet1/1
+  description Connected to dist-sw02 Ethernet1/1 - Peer link to distribution switch 02
+interface Ethernet1/2
+  description Connected to dist-sw02 Ethernet1/2 - Peer link to distribution switch 02
+interface Ethernet1/3
+  description Connected to dist-rtr01 GigabitEthernet4 - Path to distribution router
+interface Ethernet1/4
+  description Connected to dist-rtr02 GigabitEthernet4 - Path to distribution router
+interface Ethernet1/11
+  description Connected to inside-host01 ensp0s2 - Access port for inside-host
+interface Mgmt 0
+  description Connected to oob-mgmt GigabitEthernet1/6 - Management network
+!
+
+Would you like to apply this configuration to device dist-sw01 (y/n)? y
+Applying configuration to device dist-sw01.
+
+----------------------------------------------------
+
+! Device dist-sw02
+interface Ethernet1/1
+  description Connected to dist-sw01 Ethernet1/1 - Peer link to distribution switch 01
+interface Ethernet1/2
+  description Connected to dist-sw01 Ethernet1/2 - Peer link to distribution switch 01
+interface Ethernet1/3
+  description Connected to dist-rtr01 GigabitEthernet5 - Path to distribution router
+interface Ethernet1/4
+  description Connected to dist-rtr02 GigabitEthernet5 - Path to distribution router
+interface Ethernet1/11
+  description Connected to inside-host02 ensp0s2 - Access port for inside-host
+interface Mgmt 0
+  description Connected to oob-mgmt GigabitEthernet1/7 - Management network
+!
+
+Would you like to apply this configuration to device dist-sw02 (y/n)? y
+Applying configuration to device dist-sw02.
+
+----------------------------------------------------
+
+Will attempt to check interface neighbors with LLDP.
+Configuring LLDP on edge-sw01
+Learning LLDP Neighbor Details from on edge-sw01
+Configuring LLDP on core-rtr01
+Learning LLDP Neighbor Details from on core-rtr01
+Configuring LLDP on core-rtr02
+Learning LLDP Neighbor Details from on core-rtr02
+Configuring LLDP on dist-rtr01
+Learning LLDP Neighbor Details from on dist-rtr01
+Configuring LLDP on dist-rtr02
+Learning LLDP Neighbor Details from on dist-rtr02
+Configuring LLDP on dist-sw01
+Learning LLDP Neighbor Details from on dist-sw01
+Configuring LLDP on dist-sw02
+Learning LLDP Neighbor Details from on dist-sw02
+Checking if edge-sw01 GigabitEthernet0/1 is connected to edge-firewall01 GigabitEthernet0/1
+  ⚠️ No LLDP Info for interface GigabitEthernet0/1 for device edge-sw01
+Checking if edge-sw01 GigabitEthernet0/2 is connected to core-rtr01 GigabitEthernet0/0/0/1
+  Interface GigabitEthernet0/2 on device edge-sw01 is connected as expected.
+Checking if edge-sw01 GigabitEthernet0/3 is connected to core-rtr02 GigabitEthernet0/0/0/1
+  Interface GigabitEthernet0/3 on device edge-sw01 is connected as expected.
+Checking if edge-sw01 GigabitEthernet0/0 is connected to oob-mgmt GigabitEthernet1/1
+  ⚠️ No LLDP Info for interface GigabitEthernet0/0 for device edge-sw01
+Checking if core-rtr01 GigabitEthernet0/0/0/0 is connected to core-rtr02 GigabitEthernet0/0/0/0
+  Interface GigabitEthernet0/0/0/0 on device core-rtr01 is connected as expected.
+Checking if core-rtr01 GigabitEthernet0/0/0/1 is connected to edge-sw01 GigabitEthernet0/2
+  Interface GigabitEthernet0/0/0/1 on device core-rtr01 is connected as expected.
+Checking if core-rtr01 GigabitEthernet0/0/0/2 is connected to dist-rtr01 GigabitEthernet2
+  Interface GigabitEthernet0/0/0/2 on device core-rtr01 is connected as expected.
+Checking if core-rtr01 GigabitEthernet0/0/0/3 is connected to dist-rtr02 GigabitEthernet2
+  Interface GigabitEthernet0/0/0/3 on device core-rtr01 is connected as expected.
+Checking if core-rtr01 MgmtEth 0/0/CPU0/0 is connected to oob-mgmt GigabitEthernet1/2
+  ⚠️ No LLDP Info for interface MgmtEth 0/0/CPU0/0 for device core-rtr01
+Checking if core-rtr02 GigabitEthernet0/0/0/0 is connected to core-rtr01 GigabitEthernet0/0/0/0
+  Interface GigabitEthernet0/0/0/0 on device core-rtr02 is connected as expected.
+Checking if core-rtr02 GigabitEthernet0/0/0/1 is connected to edge-sw01 GigabitEthernet0/3
+  Interface GigabitEthernet0/0/0/1 on device core-rtr02 is connected as expected.
+Checking if core-rtr02 GigabitEthernet0/0/0/2 is connected to dist-rtr01 GigabitEthernet3
+  Interface GigabitEthernet0/0/0/2 on device core-rtr02 is connected as expected.
+Checking if core-rtr02 GigabitEthernet0/0/0/3 is connected to dist-rtr02 GigabitEthernet3
+  Interface GigabitEthernet0/0/0/3 on device core-rtr02 is connected as expected.
+Checking if core-rtr02 MgmtEth 0/0/CPU0/0 is connected to oob-mgmt GigabitEthernet1/3
+  ⚠️ No LLDP Info for interface MgmtEth 0/0/CPU0/0 for device core-rtr02
+Checking if dist-rtr01 GigabitEthernet2 is connected to core-rtr01 GigabitEthernet0/0/0/2
+  Interface GigabitEthernet2 on device dist-rtr01 is connected as expected.
+Checking if dist-rtr01 GigabitEthernet3 is connected to core-rtr02 GigabitEthernet0/0/0/2
+  Interface GigabitEthernet3 on device dist-rtr01 is connected as expected.
+Checking if dist-rtr01 GigabitEthernet4 is connected to dist-sw01 Ethernet1/3
+  Interface GigabitEthernet4 on device dist-rtr01 is connected as expected.
+Checking if dist-rtr01 GigabitEthernet5 is connected to dist-sw02 Ethernet1/3
+  Interface GigabitEthernet5 on device dist-rtr01 is connected as expected.
+Checking if dist-rtr01 GigabitEthernet6 is connected to dist-rtr02 GigabitEthernet6
+  Interface GigabitEthernet6 on device dist-rtr01 is connected as expected.
+Checking if dist-rtr01 GigabitEthernet1 is connected to oob-mgmt GigabitEthernet1/4
+  ⚠️ No LLDP Info for interface GigabitEthernet1 for device dist-rtr01
+Checking if dist-rtr02 GigabitEthernet2 is connected to core-rtr01 GigabitEthernet0/0/0/3
+  Interface GigabitEthernet2 on device dist-rtr02 is connected as expected.
+Checking if dist-rtr02 GigabitEthernet3 is connected to core-rtr02 GigabitEthernet0/0/0/3
+  Interface GigabitEthernet3 on device dist-rtr02 is connected as expected.
+Checking if dist-rtr02 GigabitEthernet4 is connected to dist-sw01 Ethernet1/4
+  Interface GigabitEthernet4 on device dist-rtr02 is connected as expected.
+Checking if dist-rtr02 GigabitEthernet5 is connected to dist-sw02 Ethernet1/4
+  Interface GigabitEthernet5 on device dist-rtr02 is connected as expected.
+Checking if dist-rtr02 GigabitEthernet6 is connected to dist-rtr02 GigabitEthernet6
+  ⚠️ Interface GigabitEthernet6 on device dist-rtr02 is NOT connected as expected.
+Checking if dist-rtr02 GigabitEthernet1 is connected to oob-mgmt GigabitEthernet1/5
+  ⚠️ No LLDP Info for interface GigabitEthernet1 for device dist-rtr02
+Checking if dist-sw01 Ethernet1/1 is connected to dist-sw02 Ethernet1/1
+  Interface Ethernet1/1 on device dist-sw01 is connected as expected.
+Checking if dist-sw01 Ethernet1/2 is connected to dist-sw02 Ethernet1/2
+  Interface Ethernet1/2 on device dist-sw01 is connected as expected.
+Checking if dist-sw01 Ethernet1/3 is connected to dist-rtr01 GigabitEthernet4
+  Interface Ethernet1/3 on device dist-sw01 is connected as expected.
+Checking if dist-sw01 Ethernet1/4 is connected to dist-rtr02 GigabitEthernet4
+  Interface Ethernet1/4 on device dist-sw01 is connected as expected.
+Checking if dist-sw01 Ethernet1/11 is connected to inside-host01 ensp0s2
+  ⚠️ No LLDP Info for interface Ethernet1/11 for device dist-sw01
+Checking if dist-sw01 Mgmt 0 is connected to oob-mgmt GigabitEthernet1/6
+  ⚠️ No LLDP Info for interface Mgmt 0 for device dist-sw01
+Checking if dist-sw02 Ethernet1/1 is connected to dist-sw01 Ethernet1/1
+  Interface Ethernet1/1 on device dist-sw02 is connected as expected.
+Checking if dist-sw02 Ethernet1/2 is connected to dist-sw01 Ethernet1/2
+  Interface Ethernet1/2 on device dist-sw02 is connected as expected.
+Checking if dist-sw02 Ethernet1/3 is connected to dist-rtr01 GigabitEthernet5
+  Interface Ethernet1/3 on device dist-sw02 is connected as expected.
+Checking if dist-sw02 Ethernet1/4 is connected to dist-rtr02 GigabitEthernet5
+  Interface Ethernet1/4 on device dist-sw02 is connected as expected.
+Checking if dist-sw02 Ethernet1/11 is connected to inside-host02 ensp0s2
+  ⚠️ No LLDP Info for interface Ethernet1/11 for device dist-sw02
+Checking if dist-sw02 Mgmt 0 is connected to oob-mgmt GigabitEthernet1/7
+  ⚠️ No LLDP Info for interface Mgmt 0 for device dist-sw02
+Disconnecting from devices.
+Writing config report to file 2021-06-07-00-39-31_interface_config_report.csv.
