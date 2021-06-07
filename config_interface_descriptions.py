@@ -10,6 +10,7 @@ Goal:
  - Verify if interfaces are actually connected to devices documented in CSV
 """
 
+import csv
 
 # Script entry point
 if __name__ == "__main__": 
@@ -28,8 +29,17 @@ if __name__ == "__main__":
     else: 
         print("Configurations will NOT be applied to network devices. They will be output to the screen only.")
 
+    print()
 
     # Read data from CSV source of truth
+    print("Opening and readying Source of Truth File.\n")
+    with open(args.sot, "r") as sot_file: 
+        sot = csv.DictReader(sot_file)
+
+        # Loop over each row in the Source of Truth
+        for row in sot: 
+            # For debugging, print out the raw data of the row
+            print(row)
 
 
     # Generate desired interface description configurations
