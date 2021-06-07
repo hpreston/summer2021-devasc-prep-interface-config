@@ -137,12 +137,26 @@ if __name__ == "__main__":
             # Ask user if wish to deploy change to device 
             confirm = input(f"Would you like to apply this configuration to device {device} (y/n)? ")
             # If yes, apply configuration to device 
-        if confirm == "y": 
-            # Do a check to verify the device from the SoT is in the testbed
-            if device in testbed.devices: 
-                print(f"Applying configuration to device {device}.")
-            else: 
-                print(f" ⚠️ Error: Device {device} from Source of Truth is NOT in the testbed - unable to apply configuration.")
+            if confirm == "y":
+                # Do a check to verify the device from the SoT is in the testbed
+                if device in testbed.devices:
+                    print(f"Applying configuration to device {device}.")
+                    # Try sending configuration to device 
+                    try: 
+                        result = testbed.devices[device].configure(
+                            # Combine all interface configurations into a single string
+                            "\n".join(interfaces.values())
+                            )
+                        
+                        # For debugging, print result 
+                        print(result)
+                    except Exception as e: 
+                        print(f" ⚠️ Error: Applying configuration to Device {device}")
+                        # For debugging, print error to screen
+                        print(e)
+
+                else: 
+                    print(f" ⚠️ Error: Device {device} from Source of Truth is NOT in the testbed - unable to apply configuration.")
 
 
         # Print a divider between devices
