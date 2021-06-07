@@ -13,6 +13,7 @@ Goal:
 import csv
 from jinja2 import Template
 from collections import defaultdict
+from pyats.topology.loader import load
 
 
 # Script entry point
@@ -94,6 +95,10 @@ if __name__ == "__main__":
         print("!\n")
 
     # Load pyATS testbed and connect to devices
+    print(f"Loading testbed file {args.testbed}")
+    testbed = load(args.testbed)
+    print(f"Connecting to all devices in testbed {testbed.name}")
+    testbed.connect(log_stdout=False)
 
 
     # Lookup current interface descriptions
@@ -109,6 +114,9 @@ if __name__ == "__main__":
 
 
     # Disconnect from devices
+    for device in testbed.devices: 
+        print(f"Disconnecting from device {device}.")
+        testbed.devices[device].disconnect()
 
 
     # Update Source of Truth with Results
