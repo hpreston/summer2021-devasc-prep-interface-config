@@ -169,6 +169,9 @@ if __name__ == "__main__":
     if args.check_neighbors: 
         print(f"Will attempt to check interface neighbors with LLDP.")
 
+        # Dictionary to store LLDP info from devices
+        lldp_info = {}
+
         # Enable LLDP on devices (wait 30 seconds to learn neighbors)
         # Only do the LLDP work on devices from the SoT 
         for device in new_configurations: 
@@ -182,11 +185,25 @@ if __name__ == "__main__":
                     print(e)
                     # if enabling LLDP failed, break loop to stop work on this device 
                     break 
+        
+                # Learn neighbor details 
+                try: 
+                    print(f'Learning LLDP Neighbor Details from on {device}')
+                    lldp_info[device] = testbed.devices[device].parse("show lldp neighbors detail")
+                except Exception as e: 
+                    print(f"  ⚠️ Error parsing LLDP Neighbor Details on {device} ")
+                    # for debugging print error details
+                    print(e)
+                    # if gathering data fails, break loop to stop work on this device 
+                    break 
+                    
+                # for debugging, print the lldp_info 
+                print(lldp_info)
+                
             else: 
                 print(f" ⚠️ Error: Device {device} from Source of Truth is NOT in the testbed - unable to complete test.")
 
 
-        # Learn neighbor details 
 
         # Check if neighbor details match Source of Truth
         #   Possibilities: Confirmed - LLDP Data Matches SoT
