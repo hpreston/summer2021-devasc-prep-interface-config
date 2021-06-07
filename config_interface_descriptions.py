@@ -86,14 +86,6 @@ if __name__ == "__main__":
     # print("Jinja Template rendered configuration data.")
     # print(new_configurations)
 
-    # Display the new configurations for the devices to the user for verifications.
-    print("New Device Configurations for Interface Descriptions")
-    print("----------------------------------------------------")
-    for device, interfaces in new_configurations.items(): 
-        print(f"! Device {device}")
-        for interface_name, interface_config in interfaces.items(): 
-            print(interface_config)
-        print("!\n")
 
     # Load pyATS testbed and connect to devices
     print(f"Loading testbed file {args.testbed}")
@@ -124,7 +116,26 @@ if __name__ == "__main__":
     #         except KeyError: 
     #             print(f'  {interface} : ')
 
-    # Apply new interface description configuration (with confirmation)
+
+    # Loop over each device from SoT. 
+    #  1. Display the new configuration to user 
+    #  2. If --apply was set, ask user if wish to deploy config to device 
+    print("New Device Configurations for Interface Descriptions")
+    print("----------------------------------------------------")
+    for device, interfaces in new_configurations.items(): 
+        # Display the new configurations for the devices to the user for verifications.
+        print(f"! Device {device}")
+        for interface_name, interface_config in interfaces.items(): 
+            print(interface_config)
+        print("!\n")
+
+        # Apply new interface description configuration (with confirmation)
+        # Check if --apply was set 
+
+        # Ask user if wish to deploy change to device 
+
+        # If yes, apply configuration to device 
+
 
 
     # Gather CDP/LLDP neighbor details from devices
