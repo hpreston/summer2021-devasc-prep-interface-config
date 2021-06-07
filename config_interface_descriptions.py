@@ -205,11 +205,24 @@ if __name__ == "__main__":
                 print(f" ⚠️ Error: Device {device} from Source of Truth is NOT in the testbed - unable to complete test.")
 
 
-
         # Check if neighbor details match Source of Truth
         #   Possibilities: Confirmed - LLDP Data Matches SoT
         #                  Incorrect - LLDP Data Different from SoT
         #                  Unknown   - LLDP Data Not Available for Interface
+
+        # Open the SoT read the data for the testing and loop over
+        with open(args.sot, "r") as sot_file: 
+            sot = csv.DictReader(sot_file)
+            for row in sot: 
+                # Skip blank rows 
+                if row["Device Name"]: 
+                    # Verify the device in the row has lldp_info to compare 
+                    if row["Device Name"] in lldp_info.keys(): 
+                        print(f'Checking if {row["Device Name"]} {row["Interface"]} is connected to {row["Connected Device"]} {row["Connected Interface"]}')
+                    else: 
+                        print(f'  ⚠️ No LLDP Info for {row["Device Name"]}')
+
+
 
 
 
