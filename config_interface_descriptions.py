@@ -102,6 +102,8 @@ if __name__ == "__main__":
             current_interface_details[device] = testbed.devices[device].learn("interface")
         except KeyError: 
             print(f" ⚠️ Error: Device {device} from Source of Truth is NOT in the testbed")
+    
+    print()
 
     # For debugging, print the current_interface_details 
     #   Reference the Interface Model Details Docs: https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/_models/interface.pdf
@@ -131,10 +133,15 @@ if __name__ == "__main__":
 
         # Apply new interface description configuration (with confirmation)
         # Check if --apply was set 
+        if args.apply: 
+            # Ask user if wish to deploy change to device 
+            confirm = input(f"Would you like to apply this configuration to device {device} (y/n)? ")
+            # If yes, apply configuration to device 
+            if confirm == "y": 
+                print(f"Applying configuration to device {device}.")
 
-        # Ask user if wish to deploy change to device 
-
-        # If yes, apply configuration to device 
+        # Print a divider between devices
+        print("\n----------------------------------------------------\n")
 
 
 
