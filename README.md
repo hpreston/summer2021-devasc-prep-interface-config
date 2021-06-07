@@ -421,7 +421,7 @@ dist-sw02,Mgmt 0,oob-mgmt,GigabitEthernet1/7,Management network,,Unknown - No LL
 
 
 ## Following the development process 
-If you'd like to see how the script was built, you can look at the commit log on the `config_interface_descriptions.py` file, or explore the files in the [`development-steps`](development-steps/) folder.  You'll find numbered files showing how the script was build, step by step, that you can run individually, or use as resources to create your own file.  
+If you'd like to see how the script was built, you can look at the [commit log](https://github.com/hpreston/summer2021-devasc-prep-interface-config/commits/main/config_interface_descriptions.py) on the `config_interface_descriptions.py` file, or explore the files in the [`development-steps`](development-steps/) folder.  You'll find numbered files showing how the script was build, step by step, that you can run individually, or use as resources to create your own file.  
 
 ```
 ls -l development-steps 
