@@ -170,6 +170,21 @@ if __name__ == "__main__":
         print(f"Will attempt to check interface neighbors with LLDP.")
 
         # Enable LLDP on devices (wait 30 seconds to learn neighbors)
+        # Only do the LLDP work on devices from the SoT 
+        for device in new_configurations: 
+            if device in testbed.devices: 
+                print(f"Configuring LLDP on {device}")
+                try: 
+                    testbed.devices[device].api.configure_lldp()
+                except Exception as e: 
+                    print(f"  ⚠️ Error enabling LLDP on {device} ")
+                    # for debugging print error details
+                    print(e)
+                    # if enabling LLDP failed, break loop to stop work on this device 
+                    break 
+            else: 
+                print(f" ⚠️ Error: Device {device} from Source of Truth is NOT in the testbed - unable to complete test.")
+
 
         # Learn neighbor details 
 
