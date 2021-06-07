@@ -199,7 +199,7 @@ if __name__ == "__main__":
                     break 
                     
                 # for debugging, print the lldp_info 
-                print(lldp_info)
+                # print(lldp_info)
                 
             else: 
                 print(f" ⚠️ Error: Device {device} from Source of Truth is NOT in the testbed - unable to complete test.")
@@ -275,6 +275,10 @@ if __name__ == "__main__":
             # Create field names list for report by adding new fields to the SoT fields
             report_fields = sot.fieldnames + ["Previous Interface Description"]
 
+            # If neighbor check was completed, add field to report
+            if args.check_neighbors: 
+                report_fields.append("LLDP Neighbor Check Test")
+
             report = csv.DictWriter(report_file, fieldnames=report_fields)
             report.writeheader()
 
@@ -286,6 +290,13 @@ if __name__ == "__main__":
                 # If a KeyError found indicating no current description, or device not in testbed skip data
                 except KeyError: 
                     row["Previous Interface Description"] = ""
+
+                # If neighbor check was completed, add data to report
+                if args.check_neighbors: 
+                    try: 
+                        row["LLDP Neighbor Check Test"] = test_results[row["Device Name"]][row["Interface"]]
+                    except KeyError: 
+                        row["LLDP Neighbor Check Test"] = "LLDP Test Not Run."
 
                 # Write report row to file
                 report.writerow(row)
