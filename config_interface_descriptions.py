@@ -39,7 +39,11 @@ if __name__ == "__main__":
         # Loop over each row in the Source of Truth
         for row in sot: 
             # For debugging, print out the raw data of the row
-            print(row)
+            # print(row)
+
+            # Status message on interface being processed 
+            if row["Device Name"]: 
+                print(f'Device {row["Device Name"]:15} Interface {row["Interface"]:25} SOT connection: {row["Connected Device"]} {row["Connected Interface"]}')
 
 
     # Generate desired interface description configurations
