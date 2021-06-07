@@ -15,7 +15,7 @@ from jinja2 import Template
 from collections import defaultdict
 from pyats.topology.loader import load
 from datetime import datetime
-
+from time import sleep
 
 # Script entry point
 if __name__ == "__main__": 
@@ -179,6 +179,7 @@ if __name__ == "__main__":
                 print(f"Configuring LLDP on {device}")
                 try: 
                     testbed.devices[device].api.configure_lldp()
+                    sleep(30)
                 except Exception as e: 
                     print(f"  ⚠️ Error enabling LLDP on {device} ")
                     # for debugging print error details

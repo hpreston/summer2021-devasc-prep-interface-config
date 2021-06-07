@@ -14,9 +14,7 @@ import csv
 from jinja2 import Template
 from collections import defaultdict
 from pyats.topology.loader import load
-from pyats.async_ import pcall
 from datetime import datetime
-
 
 
 # Script entry point
@@ -147,11 +145,9 @@ if __name__ == "__main__":
 
 
     # Disconnect from devices
-    print(f"Disconnecting from devices.")
-    pcall(lambda d:d.disconnect(), d=testbed.devices.values())
-    # for device in testbed.devices: 
-    #     print(f"Disconnecting from device {device}.")
-    #     testbed.devices[device].disconnect()
+    for device in testbed.devices: 
+        print(f"Disconnecting from device {device}.")
+        testbed.devices[device].disconnect()
 
 
     # Update Source of Truth with Results
