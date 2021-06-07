@@ -14,6 +14,7 @@ import csv
 from jinja2 import Template
 from collections import defaultdict
 
+
 # Script entry point
 if __name__ == "__main__": 
     print("Deploying standard interface descriptions to network.")
@@ -30,7 +31,7 @@ if __name__ == "__main__":
         print("Configurations will be applied to network devices.")
     else: 
         print("Configurations will NOT be applied to network devices. They will be output to the screen only.")
-
+    
     print()
 
     # Create Jinja Template for Interface configuration by reading contents of file
@@ -74,14 +75,23 @@ if __name__ == "__main__":
                     connected_interface=row["Connected Interface"],
                     purpose=row["Purpose"]
                 )
-        
+
         # Print a blank line
         print()
-                
+
 
     # For debugging, print out the new_configurations data
-    print("Jinja Template rendered configuration data.")
-    print(new_configurations)
+    # print("Jinja Template rendered configuration data.")
+    # print(new_configurations)
+
+    # Display the new configurations for the devices to the user for verifications.
+    print("New Device Configurations for Interface Descriptions")
+    print("----------------------------------------------------")
+    for device, interfaces in new_configurations.items(): 
+        print(f"! Device {device}")
+        for interface_name, interface_config in interfaces.items(): 
+            print(interface_config)
+        print("!\n")
 
     # Load pyATS testbed and connect to devices
 
