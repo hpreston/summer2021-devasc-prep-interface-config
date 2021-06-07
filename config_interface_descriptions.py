@@ -26,6 +26,7 @@ if __name__ == "__main__":
     parser.add_argument('--testbed', required=True, type=str, help='pyATS Testbed File')
     parser.add_argument('--sot', required=True, type=str, help='Interface Connection Source of Truth Spreadsheet')
     parser.add_argument('--apply', action='store_true', help="Should configurations be applied to network. If not set, config not applied.")
+    parser.add_argument('--check-neighbors', action='store_true', help="Should we try to use LLDP to verify interface neighbors. Default is NO.")
     args = parser.parse_args()
 
     print(f"Generating interface descriptions from file {args.sot} for testbed {args.testbed}.")
@@ -137,9 +138,9 @@ if __name__ == "__main__":
             # Ask user if wish to deploy change to device 
             confirm = input(f"Would you like to apply this configuration to device {device} (y/n)? ")
             # If yes, apply configuration to device 
-            if confirm == "y":
+            if confirm == "y": 
                 # Do a check to verify the device from the SoT is in the testbed
-                if device in testbed.devices:
+                if device in testbed.devices: 
                     print(f"Applying configuration to device {device}.")
                     # Try sending configuration to device 
                     try: 
@@ -149,7 +150,7 @@ if __name__ == "__main__":
                             )
                         
                         # For debugging, print result 
-                        print(result)
+                        # print(result)
                     except Exception as e: 
                         print(f" ⚠️ Error: Applying configuration to Device {device}")
                         # For debugging, print error to screen
@@ -165,9 +166,18 @@ if __name__ == "__main__":
 
 
     # Gather CDP/LLDP neighbor details from devices
+    if args.check_neighbors: 
+        print(f"Will attempt to check interface neighbors with LLDP.")
 
+        # Enable LLDP on devices (wait 30 seconds to learn neighbors)
 
-    # Check if neighbor details match Source of Truth
+        # Learn neighbor details 
+
+        # Check if neighbor details match Source of Truth
+        #   Possibilities: Confirmed - LLDP Data Matches SoT
+        #                  Incorrect - LLDP Data Different from SoT
+        #                  Unknown   - LLDP Data Not Available for Interface
+
 
 
     # Disconnect from devices
