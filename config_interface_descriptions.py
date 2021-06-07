@@ -225,7 +225,21 @@ if __name__ == "__main__":
 
                         # Check if there is LLDP info for the interface in question
                         if row["Interface"] in lldp_info[row["Device Name"]]["interfaces"].keys(): 
-                            pass 
+                            # Check if the expected interfaces are connected 
+                            if row["Connected Interface"] in lldp_info[row["Device Name"]]["interfaces"][row["Interface"]]["port_id"].keys(): 
+                                neighbors = lldp_info[row["Device Name"]]["interfaces"][row["Interface"]]["port_id"][row["Connected Interface"]]["neighbors"]
+                                for neighbor in neighbors: 
+                                    # Check if the SoT Connected Device is found in the LLDP Neighbor 
+                                    # This will "pass" for devices containing domain name
+                                    if row["Connected Device"] in neighbor: 
+                                        print(f'  Interface {row["Interface"]} on device {row["Device Name"]} is connected as expected.')    
+                                        test_results[row["Device Name"]][row["Interface"]] = "Confirmed"
+                                    else: 
+                                        print(f'  ⚠️ Interface {row["Interface"]} on device {row["Device Name"]} is NOT connected as expected.')    
+                                        test_results[row["Device Name"]][row["Interface"]] = "Incorrect"
+                            else: 
+                                print(f'  ⚠️ Interface {row["Interface"]} on device {row["Device Name"]} is NOT connected as expected.')    
+                                test_results[row["Device Name"]][row["Interface"]] = "Incorrect"
                         else: 
                             print(f'  ⚠️ No LLDP Info for interface {row["Interface"]} for device {row["Device Name"]}')
                             test_results[row["Device Name"]][row["Interface"]] = "Unknown - No LLDP Info for Interface"
@@ -235,7 +249,7 @@ if __name__ == "__main__":
                         test_results[row["Device Name"]][row["Interface"]] = "Unknown - No LLDP Info for Device"
         
         # for debugging, print test_results
-        print(test_results)
+        # print(test_results)
 
 
 
