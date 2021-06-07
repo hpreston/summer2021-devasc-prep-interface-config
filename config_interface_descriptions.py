@@ -210,6 +210,9 @@ if __name__ == "__main__":
         #                  Incorrect - LLDP Data Different from SoT
         #                  Unknown   - LLDP Data Not Available for Interface
 
+        # defaultdict will let us record and store the results
+        test_results = defaultdict(dict)
+
         # Open the SoT read the data for the testing and loop over
         with open(args.sot, "r") as sot_file: 
             sot = csv.DictReader(sot_file)
@@ -219,8 +222,20 @@ if __name__ == "__main__":
                     # Verify the device in the row has lldp_info to compare 
                     if row["Device Name"] in lldp_info.keys(): 
                         print(f'Checking if {row["Device Name"]} {row["Interface"]} is connected to {row["Connected Device"]} {row["Connected Interface"]}')
+
+                        # Check if there is LLDP info for the interface in question
+                        if row["Interface"] in lldp_info[row["Device Name"]]["interfaces"].keys(): 
+                            pass 
+                        else: 
+                            print(f'  ⚠️ No LLDP Info for interface {row["Interface"]} for device {row["Device Name"]}')
+                            test_results[row["Device Name"]][row["Interface"]] = "Unknown - No LLDP Info for Interface"
+
                     else: 
                         print(f'  ⚠️ No LLDP Info for {row["Device Name"]}')
+                        test_results[row["Device Name"]][row["Interface"]] = "Unknown - No LLDP Info for Device"
+        
+        # for debugging, print test_results
+        print(test_results)
 
 
 
