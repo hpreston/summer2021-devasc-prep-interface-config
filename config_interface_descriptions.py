@@ -11,6 +11,8 @@ Goal:
 """
 
 import csv
+from jinja2 import Template
+from collections import defaultdict
 
 # Script entry point
 if __name__ == "__main__": 
@@ -31,6 +33,26 @@ if __name__ == "__main__":
 
     print()
 
+    # Create Jinja Template for Interface configuration by reading contents of file
+    #   https://jinja.palletsprojects.com/en/3.0.x/api/#jinja2.Template
+    with open("interface_config_template.j2") as f: 
+        interface_template = Template(f.read())
+
+    # defaultdict variable for holding device interface configurations
+    #   Example: 
+        # {
+        #     "my_rtr01": {
+        #         "GigabitEthernet 2": "interface GigabitEthernet2 \n  description New Description", 
+        #         "GigabitEthernet 3": "interface GigabitEthernet3 \n  description New Description", 
+        #     }, 
+        #     "my_rtr02": {
+        #         "GigabitEthernet 2": "interface GigabitEthernet2 \n  description New Description", 
+        #         "GigabitEthernet 3": "interface GigabitEthernet3 \n  description New Description", 
+        #     }
+        # }
+    # defaultdicts - when an unexecting key is accessed, it is initialized with a value
+    new_configurations = defaultdict(dict)
+
     # Read data from CSV source of truth
     print("Opening and readying Source of Truth File.\n")
     with open(args.sot, "r") as sot_file: 
@@ -45,9 +67,21 @@ if __name__ == "__main__":
             if row["Device Name"]: 
                 print(f'Device {row["Device Name"]:15} Interface {row["Interface"]:25} SOT connection: {row["Connected Device"]} {row["Connected Interface"]}')
 
+                # Generate desired interface description configurations
+                new_configurations[row["Device Name"]][row["Interface"]] = interface_template.render(
+                    interface_name=row["Interface"], 
+                    connected_device=row["Connected Device"], 
+                    connected_interface=row["Connected Interface"],
+                    purpose=row["Purpose"]
+                )
+        
+        # Print a blank line
+        print()
+                
 
-    # Generate desired interface description configurations
-
+    # For debugging, print out the new_configurations data
+    print("Jinja Template rendered configuration data.")
+    print(new_configurations)
 
     # Load pyATS testbed and connect to devices
 
