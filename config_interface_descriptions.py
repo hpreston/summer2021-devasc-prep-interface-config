@@ -149,14 +149,21 @@ if __name__ == "__main__":
         report_name = f'{now.strftime("%Y-%m-%d-%H-%M-%S")}_interface_config_report.csv'
 
         print(f'Writing config report to file {report_name}.')
-        # Open the new report file
-        
-        # Create field names list for report by adding new fields to the SoT fields
-        
-        # Create the DictWriter object for the report output 
-        
-        # Loop over each row in the Source of Truth
-        
-        # Retrieve the current description from the learned data 
+        with open(report_name, 'w', newline='') as report_file:
+            # Create field names list for report by adding new fields to the SoT fields
+            report_fields = sot.fieldnames + ["Previous Interface Description"]
 
-        # Write report row to file
+            report = csv.DictWriter(report_file, fieldnames=report_fields)
+            report.writeheader()
+
+            # Loop over each row in the Source of Truth
+            for row in sot: 
+                # Retrieve the current description from the learned data 
+                try: 
+                    row["Previous Interface Description"] = current_interface_details[row["Device Name"]].info[row["Interface"]]["description"]
+                # If a KeyError found indicating no current description, or device not in testbed skip data
+                except KeyError: 
+                    row["Previous Interface Description"] = ""
+
+                # Write report row to file
+                report.writerow(row)
