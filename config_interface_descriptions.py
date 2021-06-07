@@ -101,8 +101,19 @@ if __name__ == "__main__":
     testbed.connect(log_stdout=False)
 
 
-    # Lookup current interface descriptions
+    # Lookup current interface descriptions - But only for devices in SoT
+    current_interface_details = {}
+    for device in new_configurations.keys(): 
+        try: 
+            print(f'Learning current interface state for device {device}')
+            current_interface_details[device] = testbed.devices[device].learn("interface")
+        except KeyError: 
+            print(f" ⚠️ Error: Device {device} from Source of Truth is NOT in the testbed")
 
+    # For debugging, print the current_interface_details 
+    #   Reference the Interface Model Details Docs: https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/_models/interface.pdf
+    print("Output from learn interface operation")
+    print(current_interface_details)
 
     # Apply new interface description configuration (with confirmation)
 
