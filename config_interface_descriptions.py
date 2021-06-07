@@ -113,7 +113,15 @@ if __name__ == "__main__":
     # For debugging, print the current_interface_details 
     #   Reference the Interface Model Details Docs: https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/_models/interface.pdf
     print("Output from learn interface operation")
-    print(current_interface_details)
+    # print(current_interface_details)
+    for device, interfaces in current_interface_details.items(): 
+        print(f'Device {device} Current Interface Descriptions are: ')
+        for interface, details in interfaces.info.items(): 
+            try: 
+                print(f'  {interface} : {details["description"]}')
+            # Interfaces without descriptions won't have the key in the model
+            except KeyError: 
+                print(f'  {interface} : ')
 
     # Apply new interface description configuration (with confirmation)
 
