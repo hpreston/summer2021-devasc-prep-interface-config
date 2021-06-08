@@ -4,6 +4,8 @@
 
 This repository provides code and examples as part of a [DevNet Associate Certification Preparation Webinar Series](https://learningnetwork.cisco.com/s/article/devnet-associate-prep-program-in-one-place). The recording for this webinar, and others, can be found in the [DevNet Associate Prep Program Training Plan](https://learningnetwork.cisco.com/s/learning-plan-detail-standard?ltui__urlRecordId=a1c3i0000007q9cAAA&ltui__urlRedirect=learning-plan-detail-standard&t=1596603514739).
 
+Slides from the webinar and discussions about the topic can be found in this [forum post from the Learning Network](https://learningnetwork.cisco.com/s/question/0D53i00001GoFVxCAN/devnet-associate-prep-enforcing-interface-configuration-standards-through-automation).
+
 ### Enforcing Interface Configuration Standards through Automation
 
 > You are walking out of root cause analysis readout meeting from last weeks network down situation when the network architect walks up. Like so many before, this outage was partially caused by inconsistent configuration in the network. It’ll be a big project to fully resolve, but she asks if you can come up with a way to update interface descriptions across the network based on the CSV “Source of Truth”.
