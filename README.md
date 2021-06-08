@@ -46,7 +46,7 @@ Some suggested improvements to the created testbed file include:
 
 These changes are included in the [`improved_nso_sandbox_testbed.yaml`](improved_nso_sandbox_testbed.yaml) file. 
 
-### Running the `network_inventory.py` script 
+### Running the `config_interface_descriptions.py` script 
 The [`config_interface_descriptions.py`](config_interface_descriptions.py) script in the repo should work and be ready to go.  
 
 > Note: The sandbox credentials for devices are `cisco / cisco`
